@@ -1,5 +1,38 @@
 <div class="d-flex align-items-center justify-content-center">
     <h1>Welcome to my home Page</h1>
     <a> Here create A new User</a>
-    <a> Here list all users</a>
+    <%
+=begin%>
+ <%= @user, url: users_path do |user|%>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">email</th>
+            <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row">1</th>
+            <td>user.id</td>
+            <td>user.username</td>
+            <td>user.email</td>
+            </tr>
+            <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            </tr>
+            <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+            </tr>
+        </tbody>
+    </table> 
+<%
+=end%>
 </div>
