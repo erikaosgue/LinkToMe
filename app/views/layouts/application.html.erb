@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
   <head>
     <title>LinkToMe</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="min-height: 100%;">
+  <%= render partial: "shared/navbar" %>
+  <div class="container">
     <%= yield %>
+  </div>
   </body>
 </html>
