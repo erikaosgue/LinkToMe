@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # Controller for user
-  # get "profiles", to: "users#index"
+  get "profiles", to: "users#index"
   get "myprofile", to: "users#myprofile"
   get "users", to: "users#new"
   post "users", to: "users#create"

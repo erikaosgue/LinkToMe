@@ -9,24 +9,23 @@
 
 <%= form_with model: @link, url: links_path do |form| %>
 
-    <% if @user.errors.any? %>
+    <% if @link.errors.any? %>
         <div class="alert alert-danger">
-            <% @user.errors.full_messages.each do | messages| %>
+            <% @link.errors.full_messages.each do | messages| %>
                 <div><%= messages %></div>
             <% end %>
         </div>
     <% end %>
     <div class="mb-3">
-        <%= form.label :username %>
-        <%= form.text_field :username, class: "form-control", placeholder: "username"%>
+        <%= form.label :app_name %>
+        <%= form.text_field :app_name, class: "form-control", placeholder: "App Name"%>
     </div>
     <div class="mb-3">
-        <%= form.label :email %>
-        <%= form.text_field :email, class: "form-control", placeholder: "myname@hello.com" %>
+        <%= form.label :url %>
+        <%= form.text_field :url, class: "form-control", placeholder: "url" %>
     </div>
     <div class="mb-3">
-        <%= form.label :description%>
-        <%= form.text_field :description, class: "form-control", placeholder: "description" %>
+        <% form.hidden_field :user, :value => @user %>
     </div>
 
     <div class="mb-3">

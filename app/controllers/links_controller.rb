@@ -12,7 +12,8 @@ class LinksController < ApplicationController
 	def create
 	    @link = Link.new(link_params)
         if @link.save
-            render json: {status: 'SUCCESS', message: 'Saved Link', data: @link},status: :ok
+            render :myprofile
+            # render json: {status: 'SUCCESS', message: 'Saved Link', data: @link},status: :ok
         #   redirect_to root_path, notice: "Succesfully created!"
         else
             render json: {status: 'ERROR', message: 'Link not saved', data: @link.errors},status: :unprocessable_entity

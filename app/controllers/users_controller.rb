@@ -19,6 +19,7 @@ class UsersController < ApplicationController
         #     render json: {status: 'SUCCESS', message: 'Saved User', data: @user},status: :ok
             # redirect_to myprofile_path(@user), notice: "Succesfully created!"
             # redirect_to myprofile_path[:user], notice: "Succesfully created!"
+            @link = Link.new
             render :myprofile
         else
             render json: {status: 'ERROR', message: 'User not saved', data: @user.errors},status: :unprocessable_entity
