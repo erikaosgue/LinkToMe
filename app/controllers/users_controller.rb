@@ -8,11 +8,18 @@ class UsersController < ApplicationController
 	end
 
     # create, creates a new user with the parameters that come from the request as json
-	def create
+	def new
+	    @user = User.new
+    end
+
+    def create
+
 	    @user = User.new(user_params)
         if @user.save
-            render json: {status: 'SUCCESS', message: 'Saved User', data: @user},status: :ok
-        #   redirect_to root_path, notice: "Succesfully created!"
+        #     render json: {status: 'SUCCESS', message: 'Saved User', data: @user},status: :ok
+            # redirect_to myprofile_path(@user), notice: "Succesfully created!"
+            # redirect_to myprofile_path[:user], notice: "Succesfully created!"
+            render :myprofile
         else
             render json: {status: 'ERROR', message: 'User not saved', data: @user.errors},status: :unprocessable_entity
         end
@@ -45,6 +52,10 @@ class UsersController < ApplicationController
     def links
         @user = User.find(params[:id])
         render json: {status: 'SUCCESS', message: 'List all Links in User', data: @user.links},status: :ok
+    end
+
+
+    def myprofile
     end
 
     private
