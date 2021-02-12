@@ -3,8 +3,8 @@ class UsersController < ApplicationController
     
     # Index list all the users that exist
     def index
-        @user = User.all
-        render json: {status: 'SUCCESS', message: 'Loaded Users', data: @user},status: :ok
+        @users = User.all
+        # render json: {status: 'SUCCESS', message: 'Loaded Users', data: @user},status: :ok
 	end
 
     # create, creates a new user with the parameters that come from the request as json
