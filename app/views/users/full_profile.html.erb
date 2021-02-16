@@ -1,0 +1,65 @@
+<h1>Profile</h1>
+<br>
+<h2>Username:  <%=  @user.username %></h2>
+<h2>email: <%= @user.email %></h2>
+<h2> Description: <%= @user.description %></h2>
+
+<br>
+<br>
+
+
+<h2> Add links </h2>
+<br>
+<%= form_with model: @link, url: links_path do |form| %>
+
+    <% if @link.errors.any? %>
+        <div class="alert alert-danger">
+            <% @link.errors.full_messages.each do | messages| %>
+                <div><%= messages %></div>
+            <% end %>
+        </div>
+    <% end %>
+    <div class="mb-3">
+        <%= form.label :app_name %>
+        <%= form.text_field :app_name, class: "form-control", placeholder: "App Name"%>
+    </div>
+    <div class="mb-3">
+        <%= form.label :url %>
+        <%= form.text_field :url, class: "form-control", placeholder: "url" %>
+    </div>
+    <div class="mb-3">
+        <%=  hidden_field_tag "link[user_id]", @user.id %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.submit "SAVE", class: "btn btn-primary" %>
+    </div>
+<% end %>
+<br>
+<br>
+<h2> My links </h2>
+<table class="table table-bordered table-hover" style="width: 80%; margin:0;">
+    <thead>
+        <tr class="table-active">
+        <th scope="col">Id</th>
+        <th scope="col">App Name</th>
+        <th scope="col">Links</th>
+        <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @links.each do |link| %>
+        <tr>
+        <th scope="row"><%= link.id %></th>
+        <td><%= link.app_name %></td>
+        <td><%= link.url %></td>
+        <td><%= link_to 'Edit', edit_link_path(link) %>
+            <%= link_to 'Delete', link_path(link), 
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+           </td>
+        </tr>
+        <tr>
+    <% end %>
+    </tbody>
+</table>
