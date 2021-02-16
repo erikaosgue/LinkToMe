@@ -1,0 +1,29 @@
+<h1>Updating Link here</h2>
+
+
+<h2> Update link </h2>
+
+<%= form_with model: @link, url: link_path, method: :put do |form| %>
+    <% if @link.errors.any? %>
+        <div class="alert alert-danger">
+            <% @link.errors.full_messages.each do | messages| %>
+                <div><%= messages %></div>
+            <% end %>
+        </div>
+    <% end %>
+    <div class="mb-3">
+        <%= form.label :app_name %>
+        <%= form.text_field :app_name, class: "form-control", placeholder: "App Name"%>
+    </div>
+    <div class="mb-3">
+        <%= form.label :url %>
+        <%= form.text_field :url, class: "form-control", placeholder: "url" %>
+    </div>
+    <div class="mb-3">
+        <%= hidden_field_tag "link[user_id]", @user.id %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.submit "Save changes", class: "btn btn-primary" %>
+    </div>
+<% end %>
