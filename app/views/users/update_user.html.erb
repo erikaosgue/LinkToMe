@@ -1,0 +1,31 @@
+<h1>Updating User here</h2>
+
+
+<h2> Update User </h2>
+
+<%= form_with model: @user, url: user_path, method: :put do |form| %>
+
+    <% if @user.errors.any? %>
+        <div class="alert alert-danger">
+            <% @user.errors.full_messages.each do | messages| %>
+                <div><%= messages %></div>
+            <% end %>
+        </div>
+    <% end %>
+    <div class="mb-3">
+        <%= form.label :username %>
+        <%= form.text_field :username, class: "form-control", placeholder: "username"%>
+    </div>
+    <div class="mb-3">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: "form-control", placeholder: "myname@hello.com" %>
+    </div>
+    <div class="mb-3">
+        <%= form.label :description%>
+        <%= form.text_field :description, class: "form-control", placeholder: "description" %>
+    </div>
+
+    <div class="mb-3">
+        <%= form.submit "SAVE CHANGES", class: "btn btn-primary" %>
+    </div>
+<% end %>
