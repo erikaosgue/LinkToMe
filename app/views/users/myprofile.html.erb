@@ -1,11 +1,15 @@
-<h1>this ...is my profile</h1>
-<h2>username:  <%=  @user.username %></h2>
+<h1>Profile</h1>
+<br>
+<h2>Username:  <%=  @user.username %></h2>
 <h2>email: <%= @user.email %></h2>
-<h2>id: <%= @user.id %></h2>
-<h2> options: see, delete, edit</h2>
 
+<h2> Description: <%= @user.description %></h2>
 
-<h2> ADD links </h2>
+<br>
+<br>
+
+<h2> Add links </h2>
+<br>
 
 <%= form_with model: @link, url: links_path do |form| %>
 
@@ -25,11 +29,10 @@
         <%= form.text_field :url, class: "form-control", placeholder: "url" %>
     </div>
     <div class="mb-3">
-        <% form.hidden_field :user, :value => @user %>
+        <%=  hidden_field_tag "link[user_id]", @user.id %>
     </div>
 
     <div class="mb-3">
         <%= form.submit "SAVE", class: "btn btn-primary" %>
     </div>
 <% end %>
-    
