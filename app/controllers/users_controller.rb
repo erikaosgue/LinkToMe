@@ -22,7 +22,8 @@ class UsersController < ApplicationController
             @link = Link.new
             render :myprofile
         else
-            render json: {status: 'ERROR', message: 'User not saved', data: @user.errors},status: :unprocessable_entity
+            render :new
+            # render json: {status: 'ERROR', message: 'User not saved', data: @user.errors},status: :unprocessable_entity
         end
 	end
 
@@ -30,23 +31,35 @@ class UsersController < ApplicationController
 	def update
         @user = User.find(params[:id])
         if @user.update(user_params)
-            render json: {status: 'SUCCESS', message: 'Updated User', data: @user},status: :ok
+            @users = User.all
+            render :index
+            # render json: {status: 'SUCCESS', message: 'Updated User', data: @user},status: :ok
         else
             render json: {status: 'ERROR', message: 'User not updated', data: @user.errors},status: :unprocessable_entity
         end
 	end
 
+    def edit
+        @user = User.find(params[:id])
+        render :update_user
+    end
+
     #destroy, Deletes a specific user base on the id
 	def destroy
         @user = User.find_by_id(params[:id])
+        @users = User.all
         @user.destroy
-        render json: {status: 'SUCCESS', message: 'Delete User', data: @user}, status: :ok
+        render :index
+        # render json: {status: 'SUCCESS', message: 'Delete User', data: @user}, status: :ok
 	end
 
     # show, display a specific user base on the id
     def show
         @user = User.find(params[:id])
-        render json: {status: 'SUCCESS', message: 'Loaded User', data: @user},status: :ok
+        @links = Link.where(user_id: @user.id)
+        @link = Link.new
+        render :full_profile
+        # render json: {status: 'SUCCESS', message: 'Loaded User', data: @user},status: :ok
     end
 
     # links, will display all the links of a specific user base on the id
