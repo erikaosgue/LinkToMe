@@ -11,7 +11,6 @@
 <h2> Add links </h2>
 <br>
 <%= form_with model: @link, url: links_path do |form| %>
-
     <% if @link.errors.any? %>
         <div class="alert alert-danger">
             <% @link.errors.full_messages.each do | messages| %>
