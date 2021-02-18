@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token
     
+    user.avatar.attach(user_paramss[:avatar])
+
+    def user_paramss
+        params.require(:user).permit(:name, :avatar)
+    end
+    
     # Index list all the users that exist
     def index
         @users = User.all
-        # render json: {status: 'SUCCESS', message: 'Loaded Users', data: @user},status: :ok
 	end
 
     # create, creates a new user with the parameters that come from the request as json
@@ -16,14 +21,10 @@ class UsersController < ApplicationController
 
 	    @user = User.new(user_params)
         if @user.save
-        #     render json: {status: 'SUCCESS', message: 'Saved User', data: @user},status: :ok
-            # redirect_to myprofile_path(@user), notice: "Succesfully created!"
-            # redirect_to myprofile_path[:user], notice: "Succesfully created!"
             @link = Link.new
             render :myprofile
         else
             render :new
-            # render json: {status: 'ERROR', message: 'User not saved', data: @user.errors},status: :unprocessable_entity
         end
 	end
 
@@ -33,7 +34,6 @@ class UsersController < ApplicationController
         if @user.update(user_params)
             @users = User.all
             render :index
-            # render json: {status: 'SUCCESS', message: 'Updated User', data: @user},status: :ok
         else
             render json: {status: 'ERROR', message: 'User not updated', data: @user.errors},status: :unprocessable_entity
         end
@@ -50,16 +50,15 @@ class UsersController < ApplicationController
         @users = User.all
         @user.destroy
         render :index
-        # render json: {status: 'SUCCESS', message: 'Delete User', data: @user}, status: :ok
 	end
 
     # show, display a specific user base on the id
+    # get Users/:id
     def show
         @user = User.find(params[:id])
         @links = Link.where(user_id: @user.id)
         @link = Link.new
         render :full_profile
-        # render json: {status: 'SUCCESS', message: 'Loaded User', data: @user},status: :ok
     end
 
     # links, will display all the links of a specific user base on the id
